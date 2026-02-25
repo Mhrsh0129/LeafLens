@@ -1,212 +1,121 @@
-# Potato Disease Classification
+# 🍃 LeafLens 
 
-## Setup for Python:
+**A Trademark of @Maharsh Doshi**
 
-1. Install Python ([Setup instructions](https://wiki.python.org/moin/BeginnersGuide))
+[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 
-2. Install Python packages
+---
 
-```
-pip3 install -r training/requirements.txt
-pip3 install -r api/requirements.txt
-```
+## 📖 Overview
 
-3. Install Tensorflow Serving ([Setup instructions](https://www.tensorflow.org/tfx/serving/setup))
+**LeafLens** is a state-of-the-art, end-to-end Machine Learning solution designed to classify plant and leaf diseases automatically. Equipped with a high-accuracy deep learning model, a modern **FastAPI** backend, an elegant **React** web application, and a **React Native** mobile app, LeafLens empowers farmers, gardeners, and plant enthusiasts to instantly diagnose plant health from a single photo.
 
-## Setup for ReactJS
+Proudly created by **@Maharsh Doshi**.
 
-1. Install Nodejs ([Setup instructions](https://nodejs.org/en/download/package-manager/))
-2. Install NPM ([Setup instructions](https://www.npmjs.com/get-npm))
-3. Install dependencies
+---
 
-```bash
-cd frontend
-npm install --from-lock-json
-npm audit fix
-```
+## ✨ Key Features
 
-4. Copy `.env.example` as `.env`.
+- **🧠 Accurate ML Model**: Diagnoses leaf health (e.g., Early Blight, Late Blight, or Healthy) with high precision using Convolutional Neural Networks.
+- **⚡ Fast Backend**: Developed with FastAPI and integrated with TensorFlow Serving for scalable inference.
+- **🌐 Beautiful Web App**: A user-friendly React web interface for seamless drag-and-drop diagnostic testing.
+- **📱 Mobile Ready**: A React Native application for iOS and Android—snap a photo and get results instantly!
+- **☁️ Cloud Deployment**: Ready-to-deploy configurations for Google Cloud Platform (GCP) using TF Lite or full models.
 
-5. Change API url in `.env`.
+---
 
-## Setup for React-Native app
+## 🛠️ Setup Instructions
 
-1. Go to the [React Native environment setup](https://reactnative.dev/docs/environment-setup), then select `React Native CLI Quickstart` tab.  
+### 1. Python API Setup
 
-2. Install dependencies
+Prerequisites: Python 3.x, TensorFlow Serving.
 
 ```bash
-cd mobile-app
-yarn install
-```
+# 1. Install dependencies
+pip install -r training/requirements.txt
+pip install -r api/requirements.txt
 
-  - 2.1 Only for mac users
-```bash
-cd ios && pod install && cd ../
-```
-
-3. Copy `.env.example` as `.env`.
-
-4. Change API url in `.env`.
-
-## Training the Model
-
-1. Download the data from [kaggle](https://www.kaggle.com/arjuntejaswi/plant-village).
-2. Only keep folders related to Potatoes.
-3. Run Jupyter Notebook in Browser.
-
-```bash
-jupyter notebook
-```
-
-4. Open `training/potato-disease-training.ipynb` in Jupyter Notebook.
-5. In cell #2, update the path to dataset.
-6. Run all the Cells one by one.
-7. Copy the model generated and save it with the version number in the `models` folder.
-
-## Running the API
-
-### Using FastAPI
-
-1. Get inside `api` folder
-
-```bash
+# 2. Run the FastAPI server locally
 cd api
-```
-
-2. Run the FastAPI Server using uvicorn
-
-```bash
 uvicorn main:app --reload --host 0.0.0.0
 ```
 
-3. Your API is now running at `0.0.0.0:8000`
+### 2. Web App (React) Setup
 
-### Using FastAPI & TF Serve
-
-1. Get inside `api` folder
+Prerequisites: Node.js, NPM.
 
 ```bash
-cd api
-```
-
-2. Copy the `models.config.example` as `models.config` and update the paths in file.
-3. Run the TF Serve (Update config file path below)
-
-```bash
-docker run -t --rm -p 8501:8501 -v C:/Code/potato-disease-classification:/potato-disease-classification tensorflow/serving --rest_api_port=8501 --model_config_file=/potato-disease-classification/models.config
-```
-
-4. Run the FastAPI Server using uvicorn
-   For this you can directly run it from your main.py or main-tf-serving.py using pycharm run option (as shown in the video tutorial)
-   OR you can run it from command prompt as shown below,
-
-```bash
-uvicorn main-tf-serving:app --reload --host 0.0.0.0
-```
-
-5. Your API is now running at `0.0.0.0:8000`
-
-## Running the Frontend
-
-1. Get inside `api` folder
-
-```bash
+# 1. Go to the frontend directory
 cd frontend
+
+# 2. Install packages
+npm install --from-lock-json
+
+# 3. Setup Environment Variables
+cp .env.example .env
+# Update the API URL in .env if needed
+
+# 4. Start the application
+npm start
 ```
 
-2. Copy the `.env.example` as `.env` and update `REACT_APP_API_URL` to API URL if needed.
-3. Run the frontend
+### 3. Mobile App (React Native) Setup
+
+Prerequisites: React Native CLI environment.
 
 ```bash
-npm run start
-```
-
-## Running the app
-
-1. Get inside `mobile-app` folder
-
-```bash
+# 1. Navigate to the mobile app directory
 cd mobile-app
+
+# 2. Install packages
+yarn install
+
+# 3. (macOS only) Install iOS pods
+cd ios && pod install && cd ..
+
+# 4. Setup Environment Variables
+cp .env.example .env
+# Update the API URL in .env if needed
+
+# 5. Run the app!
+npm run android   # For Android
+npm run ios       # For iOS
 ```
 
-2. Copy the `.env.example` as `.env` and update `URL` to API URL if needed.
+---
 
-3. Run the app (android/iOS)
+## 🧠 Model Training
 
-```bash
-npm run android
-```
+The model was trained on thousands of plant leaf images to effectively separate healthy leaves from diseased ones.
 
-or
+1. Open `training/potato-disease-training.ipynb` in a Jupyter Notebook environment.
+2. Ensure you have your dataset downloaded and unzipped.
+3. Update the dataset directory inside the notebook.
+4. Run the cells iteratively to produce a new `.h5` model.
 
-```bash
-npm run ios
-```
+---
 
-4. Creating public ([signed APK](https://reactnative.dev/docs/signed-apk-android))
+## ☁️ Cloud Deployment (GCP)
 
+To deploy the solution to Google Cloud Computing (GCP Cloud Functions):
 
-## Creating the TF Lite Model
+1. **Upload your model** (`potatoes.h5` or `potato-model.tflite`) to a GCP Storage Bucket.
+2. Edit `gcp/main.py` or `gcp/extra/main_with_tf_lite.py` to target your `leaflens-tf-models` bucket.
+3. Authenticate with GCP CLI:
+   ```bash
+   gcloud auth login
+   ```
+4. Deploy to Cloud Functions:
+   ```bash
+   cd gcp
+   gcloud functions deploy predict --runtime python38 --trigger-http --memory 512 --project your_project_id
+   ```
 
-1. Run Jupyter Notebook in Browser.
+---
 
-```bash
-jupyter notebook
-```
+## 🏆 Trademark
 
-2. Open `training/tf-lite-converter.ipynb` in Jupyter Notebook.
-3. In cell #2, update the path to dataset.
-4. Run all the Cells one by one.
-5. Model would be saved in `tf-lite-models` folder.
-
-## Deploying the TF Lite on GCP
-
-1. Create a [GCP account](https://console.cloud.google.com/freetrial/signup/tos?_ga=2.25841725.1677013893.1627213171-706917375.1627193643&_gac=1.124122488.1627227734.Cj0KCQjwl_SHBhCQARIsAFIFRVVUZFV7wUg-DVxSlsnlIwSGWxib-owC-s9k6rjWVaF4y7kp1aUv5eQaAj2kEALw_wcB).
-2. Create a [Project on GCP](https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project) (Keep note of the project id).
-3. Create a [GCP bucket](https://console.cloud.google.com/storage/browser/).
-4. Upload the potatoes.h5 model in the bucket in the path `models/potatos.h5`.
-5. Install Google Cloud SDK ([Setup instructions](https://cloud.google.com/sdk/docs/quickstarts)).
-6. Authenticate with Google Cloud SDK.
-
-```bash
-gcloud auth login
-```
-
-7. Run the deployment script.
-
-```bash
-cd gcp
-gcloud functions deploy predict_lite --runtime python38 --trigger-http --memory 512 --project project_id
-```
-
-8. Your model is now deployed.
-9. Use Postman to test the GCF using the [Trigger URL](https://cloud.google.com/functions/docs/calling/http).
-
-Inspiration: https://cloud.google.com/blog/products/ai-machine-learning/how-to-serve-deep-learning-models-using-tensorflow-2-0-with-cloud-functions
-
-## Deploying the TF Model (.h5) on GCP
-
-1. Create a [GCP account](https://console.cloud.google.com/freetrial/signup/tos?_ga=2.25841725.1677013893.1627213171-706917375.1627193643&_gac=1.124122488.1627227734.Cj0KCQjwl_SHBhCQARIsAFIFRVVUZFV7wUg-DVxSlsnlIwSGWxib-owC-s9k6rjWVaF4y7kp1aUv5eQaAj2kEALw_wcB).
-2. Create a [Project on GCP](https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project) (Keep note of the project id).
-3. Create a [GCP bucket](https://console.cloud.google.com/storage/browser/).
-4. Upload the tf .h5 model generate in the bucket in the path `models/potato-model.h5`.
-5. Install Google Cloud SDK ([Setup instructions](https://cloud.google.com/sdk/docs/quickstarts)).
-6. Authenticate with Google Cloud SDK.
-
-```bash
-gcloud auth login
-```
-
-7. Run the deployment script.
-
-```bash
-cd gcp
-gcloud functions deploy predict --runtime python38 --trigger-http --memory 512 --project project_id
-```
-
-8. Your model is now deployed.
-9. Use Postman to test the GCF using the [Trigger URL](https://cloud.google.com/functions/docs/calling/http).
-
-Inspiration: https://cloud.google.com/blog/products/ai-machine-learning/how-to-serve-deep-learning-models-using-tensorflow-2-0-with-cloud-functions
-
+**LeafLens** is a trademark of **@Maharsh Doshi**. All previous branding has been removed entirely.

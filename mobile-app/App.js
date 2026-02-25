@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Image,
@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Config from 'react-native-config';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import PermissionsService, {isIOS} from './Permissions';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import PermissionsService, { isIOS } from './Permissions';
 
 axios.interceptors.request.use(
   async config => {
@@ -31,7 +31,7 @@ axios.interceptors.request.use(
   error => error,
 );
 
-export const {height, width} = Dimensions.get('window');
+export const { height, width } = Dimensions.get('window');
 
 export const configureUrl = url => {
   let authUrl = url;
@@ -42,7 +42,7 @@ export const configureUrl = url => {
 };
 
 export const fonts = {
-  Bold: {fontFamily: 'Roboto-Bold'},
+  Bold: { fontFamily: 'Roboto-Bold' },
 };
 
 const options = {
@@ -155,15 +155,15 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ImageBackground
         blurRadius={10}
-        source={{uri: 'background'}}
-        style={{height: height, width: width}}
+        source={{ uri: 'background' }}
+        style={{ height: height, width: width }}
       />
-      <Text style={styles.title}>{'Potato Disease \nPrediction App'}</Text>
+      <Text style={styles.title}>{'LeafLens \nPlant Disease App'}</Text>
       <TouchableOpacity onPress={clearOutput} style={styles.clearStyle}>
-        <Image source={{uri: 'clean'}} style={styles.clearImage} />
+        <Image source={{ uri: 'clean' }} style={styles.clearImage} />
       </TouchableOpacity>
       {(image?.length && (
-        <Image source={{uri: image}} style={styles.imageStyle} />
+        <Image source={{ uri: image }} style={styles.imageStyle} />
       )) ||
         null}
       {(result && label && (
@@ -182,7 +182,7 @@ const App = () => {
       )) ||
         (image && <Text style={styles.emptyText}>{label}</Text>) || (
           <Text style={styles.emptyText}>
-            Use below buttons to select a picture of a potato plant leaf.
+            Use below buttons to select a picture of a plant leaf.
           </Text>
         )}
       <View style={styles.btn}>
@@ -190,13 +190,13 @@ const App = () => {
           activeOpacity={0.9}
           onPress={() => manageCamera('Camera')}
           style={styles.btnStyle}>
-          <Image source={{uri: 'camera'}} style={styles.imageIcon} />
+          <Image source={{ uri: 'camera' }} style={styles.imageIcon} />
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => manageCamera('Photo')}
           style={styles.btnStyle}>
-          <Image source={{uri: 'gallery'}} style={styles.imageIcon} />
+          <Image source={{ uri: 'gallery' }} style={styles.imageIcon} />
         </TouchableOpacity>
       </View>
     </View>
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     ...fonts.Bold,
     color: '#FFF',
   },
-  clearImage: {height: 40, width: 40, tintColor: '#FFF'},
+  clearImage: { height: 40, width: 40, tintColor: '#FFF' },
   mainOuter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -255,10 +255,10 @@ const styles = StyleSheet.create({
     tintColor: '#FFF',
     zIndex: 10,
   },
-  space: {marginVertical: 10, marginHorizontal: 10},
-  labelText: {color: '#FFF', fontSize: 20, ...fonts.Bold},
-  resultText: {fontSize: 32, ...fonts.Bold},
-  imageIcon: {height: 40, width: 40, tintColor: '#000'},
+  space: { marginVertical: 10, marginHorizontal: 10 },
+  labelText: { color: '#FFF', fontSize: 20, ...fonts.Bold },
+  resultText: { fontSize: 32, ...fonts.Bold },
+  imageIcon: { height: 40, width: 40, tintColor: '#000' },
   emptyText: {
     position: 'absolute',
     top: height / 1.6,

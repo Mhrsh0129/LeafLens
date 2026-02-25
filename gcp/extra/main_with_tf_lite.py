@@ -9,7 +9,7 @@ input_index = None
 output_index = None
 class_names = ["Early Blight", "Late Blight", "Healthy"]
 
-BUCKET_NAME = "codebasics-tf-models" # Here you need to put the name of your GCP bucket
+BUCKET_NAME = "leaflens-tf-models"  # Here you need to put the name of your GCP bucket
 
 
 def download_blob(bucket_name, source_blob_name, destination_file_name):
@@ -35,6 +35,7 @@ def predict_using_tflite_model(image):
     confidence = round(100 * (np.max(predictions)), 2)
     return predicted_class, confidence
 
+
 def predict(request):
     global model
     if model is None:
@@ -48,26 +49,28 @@ def predict(request):
     image = request.files["file"]
 
     image = np.array(
-        Image.open(image).convert("RGB").resize((256, 256)) # image resizing
+        Image.open(image).convert("RGB").resize((256, 256))  # image resizing
     )
 
     print("before scaling:", image)
-    image = image/255 # normalize the image in 0 to 1 range
+    image = image / 255  # normalize the image in 0 to 1 range
     print("after scaling:", image)
 
     predicted_class, confidence = predict_using_regular_model(image)
     return {"class": predicted_class, "confidence": confidence}
+
 
 def predict_using_regular_model(img):
     global model
     img_array = tf.expand_dims(img, 0)
     predictions = model.predict(img_array)
 
-    print("Predictions:",predictions)
+    print("Predictions:", predictions)
 
     predicted_class = class_names[np.argmax(predictions[0])]
     confidence = round(100 * (np.max(predictions[0])), 2)
     return predicted_class, confidence
+
 
 def predict_lite(request):
     global interpreter
@@ -87,8 +90,6 @@ def predict_lite(request):
 
     image = request.files["file"]
 
-    image = np.array(
-        Image.open(image).convert("RGB").resize((256, 256))
-    )[:, :, ::-1]
+    image = np.array(Image.open(image).convert("RGB").resize((256, 256)))[:, :, ::-1]
     predicted_class, confidence = predict_using_tflite_model(image)
     return {"class": predicted_class, "confidence": confidence}
