@@ -5,3 +5,13 @@ __pycache__
 .ipynb_checkpoints
 models.config
 PlantVillage/
+
+# Django backend
+leaflens_backend/venv/
+leaflens_backend/.env
+leaflens_backend/db.sqlite3
+leaflens_backend/media/
+*.pyc
+
+# Frontend
+frontend/node_modules/
